@@ -9,7 +9,7 @@ import { sendLargeMessage } from '../utils/sendLargeMessage';
 
 dotenv.config();
 
-const bot = new TelegramBot(process.env.BOT_TOKEN as string, { polling: true });
+const bot = new TelegramBot(process.env.BOT_TOKEN as string, { polling: false });
 
 export function registerCommands() {
 
