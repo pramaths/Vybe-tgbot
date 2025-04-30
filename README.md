@@ -3,6 +3,11 @@
 An innovative Telegram bot that delivers **real-time, on-chain analytics** to crypto communities—think wallet tracking, token metrics, or whale alerts—all powered by [Vybe APIs](https://vybe.network).
 
 
+## 🌐 Live Demo
+
+🎥 **Watch Demo on Google Drive**  
+[Click here to watch the demo](https://drive.google.com/file/d/1EqaISerchsaRqhhVY7kZa2gSWGThH_XD/view?usp=sharing)
+ 
 ## ✨ Features
 
 - 📈 **Token Metrics** — Get detailed token info with a simple command.
