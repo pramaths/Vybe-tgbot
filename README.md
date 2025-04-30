@@ -29,14 +29,21 @@ An innovative Telegram bot that delivers **real-time, on-chain analytics** to cr
 /help
   Shows available commands
 
-/tokendetail [tokenaddress]
-  Get token details
+/tokendetail <token_address>
+  Get token details for a given token address
 
-/tokenbalances [walletaddress]
-  View wallet token balances
+/tokenbalances <wallet_address>
+  View all token balances for a wallet address
 
-/walletpnl [walletaddress]
-  Analyze wallet trading PnL
+/walletpnl <wallet_address>
+  Analyze wallet trading PnL (profit and loss) for a wallet address
+
+/topholders <token_address>
+  Get top holders of a token by token address
+
+/get2wpricechart <token_address>
+  Get 2-week price and volume chart for a token address
+
 ```
 
 ## 🚀 Getting Started
@@ -57,6 +64,7 @@ Create a `.env` file in the root directory and add:
 ```ini
 BOT_TOKEN=your-telegram-bot-token
 API_TOKEN=your-vybe-api-token
+GEMINI_API_TOKEN=your-gemini-token
 ```
 
 4. **Build and Run the Bot**
@@ -67,13 +75,13 @@ npm run start
 
 ## 📸 Screenshots
 
-Sneak peek of the bot in action — coming soon!
-
-| Command | Output |
-|---------|--------|
-| `/tokendetail` | ![tokendetail Screenshot](/api/placeholder/400/250) |
-| `/tokenbalances` | ![tokenbalances Screenshot](/api/placeholder/400/250) |
-| `/walletpnl` | ![walletpnl Screenshot](/api/placeholder/400/250) |
+| Command         | Output(s)                                                                                                 |
+|-----------------|----------------------------------------------------------------------------------------------------------|
+| `/tokenbalances`| ![1](screenshots/tokenbalances/1.png)                                                                    |
+| `/walletpnl`    | ![1](screenshots/walletpnl/1.png) ![2](screenshots/walletpnl/2.png)                                      |
+| `/topholders`    | ![1](screenshots/topholders/1.png) ![2](screenshots/topholders/2.png)                                      |
+| `/tokendetail`  | ![1](screenshots/tokendetail/1.png) ![2](screenshots/tokendetail/2.png)                                  |
+| `/get2wpricechart`| ![1](screenshots/get2w/1.png) |
 
 ## 🤝 Contributing
 
@@ -85,8 +93,8 @@ We welcome PRs and contributions! Just follow these general rules:
 
 <!-- ## 📄 License
 
-MIT © Your Name
+MIT © Your Name -->
 
 ## 🌐 Live Bot
 
-🟢 Bot is live! Find it on Telegram at @Bubblemaps_orbot  -->
+🟢 Bot is live! Find it on Telegram at @Vybe_tgbot
