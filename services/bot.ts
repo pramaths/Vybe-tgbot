@@ -119,21 +119,22 @@ _Get 2-week price chart -_
 
             message += `*Summary:*\n`;
             message += `- *Win Rate:* ${summary.winRate ? (summary.winRate * 100).toFixed(2) + '%' : 'N/A'}\n`;
-            message += `- *Realized PnL (USD):* $${summary.realizedPnlUsd.toFixed(2)}\n`;
-            message += `- *Unrealized PnL (USD):* $${summary.unrealizedPnlUsd.toFixed(2)}\n`;
+            message += `- *Realized PnL (USD):* $${formatValue(summary.realizedPnlUsd)}\n`;
+            message += `- *Unrealized PnL (USD):* $${formatValue(summary.unrealizedPnlUsd)}\n`;
             message += `- *Unique Tokens Traded:* ${summary.uniqueTokensTraded}\n`;
-            message += `- *Average Trade (USD):* $${summary.averageTradeUsd.toFixed(2)}\n`;
+            message += `- *Average Trade (USD):* $${formatValue(summary.averageTradeUsd)}\n`;
             message += `- *Total Trades:* ${summary.tradesCount}\n`;
             message += `- *Winning Trades:* ${summary.winningTradesCount}\n`;
             message += `- *Losing Trades:* ${summary.losingTradesCount}\n`;
-            message += `- *Trades Volume (USD):* $${summary.tradesVolumeUsd.toFixed(2)}\n`;
-            message += `- *Best Performing Token:* ${summary.bestPerformingToken || 'N/A'}\n`;
-            message += `- *Worst Performing Token:* ${summary.worstPerformingToken || 'N/A'}\n\n`;
+            message += `- *Trades Volume (USD):* $${formatValue(summary.tradesVolumeUsd)}\n`;
+            message += `- *Best Performing Token:* ${summary.bestPerformingToken.tokenSymbol || 'N/A'}\n`;
+            message += `- *Worst Performing Token:* ${summary.worstPerformingToken.tokenSymbol || 'N/A'}\n\n`;
 
             if (summary.pnlTrendSevenDays.length > 0) {
                 message += `*PnL Trend (Last 7 Days):*\n`;
-                summary.pnlTrendSevenDays.forEach((trend: any, index: number) => {
-                    message += `   Day ${index + 1}: $${trend.toFixed(2)}\n`;
+                summary.pnlTrendSevenDays.forEach((trend: number[], dayIndex: number) => {
+                    const dailyTrend = trend.map(value => `$${formatValue(value)}`).join(', ');
+                    message += `   Day ${dayIndex + 1}: [${dailyTrend}]\n`;
                 });
                 message += `\n`;
             }
@@ -141,21 +142,21 @@ _Get 2-week price chart -_
             if (tokenMetrics.length > 0) {
                 message += `*Token Metrics:*\n`;
                 tokenMetrics.forEach((token: any) => {
-                    message += `🔹 *${token.name} (${token.symbol})*\n`;
-                    message += `   - *Realized PnL (USD):* $${token.realizedPnlUsd.toFixed(2)}\n`;
-                    message += `   - *Unrealized PnL (USD):* $${token.unrealizedPnlUsd.toFixed(2)}\n`;
-                    message += `   - *Trades Count:* ${token.tradesCount}\n`;
-                    message += `   - *Volume (USD):* $${token.volumeUsd.toFixed(2)}\n\n`;
+                    message += `🔹 *${token.tokenSymbol}*\n`;
+                    message += `   - *Realized PnL (USD):* $${formatValue(token.realizedPnlUsd)}\n`;
+                    message += `   - *Unrealized PnL (USD):* $${formatValue(token.unrealizedPnlUsd)}\n`;
+                    message += `   - *Buys:*\n`;
+                    message += `       - *Volume (USD):* $${formatValue(token.buys.volumeUsd)}\n`;
+                    message += `       - *Token Amount:* ${token.buys.tokenAmount}\n`;
+                    message += `       - *Transaction Count:* ${token.buys.transactionCount}\n`;
+                    message += `   - *Sells:*\n`;
+                    message += `       - *Volume (USD):* $${formatValue(token.sells.volumeUsd)}\n`;
+                    message += `       - *Token Amount:* ${token.sells.tokenAmount}\n`;
+                    message += `       - *Transaction Count:* ${token.sells.transactionCount}\n\n`;
                 });
             }
 
             bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
-
-             // Send additional message with network graph link
-             const networkGraphLink = `https://widget.vybenetwork.com/network-graph?address=${walletAddress}&entity=wallet&connectionNode=wallet`;
-             bot.sendMessage(chatId, `🌐 For an interactive visualization, visit its network graph provided by Vybe: [Click Here](${networkGraphLink})`, {
-                 parse_mode: 'Markdown',
-             });
 
         } catch (error) {
             console.error('Error in /walletpnl command:', error);
