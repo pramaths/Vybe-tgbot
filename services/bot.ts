@@ -9,7 +9,7 @@ import { sendLargeMessage } from '../utils/sendLargeMessage';
 
 dotenv.config();
 
-const bot = new TelegramBot(process.env.BOT_TOKEN as string, { polling: false });
+const bot = new TelegramBot(process.env.BOT_TOKEN as string, { polling: true });
 
 export function registerCommands() {
 
@@ -384,7 +384,7 @@ _Get 2-week price chart -_
         const tokenAddress = match[1];
         console.log(`[LOG] Fetching price data for token address: ${tokenAddress}`);
 
-        bot.sendMessage(chatId, `🔍 Generating 7-day price chart for token: ${tokenAddress}. Please wait...`);
+        bot.sendMessage(chatId, `🔍 Generating 2-week price chart for token: ${tokenAddress}. Please wait...`);
 
         try {
             const response = await axios.get(`https://api.vybenetwork.xyz/price/${tokenAddress}/token-ohlcv`, {
